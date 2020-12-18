@@ -86,10 +86,33 @@ namespace Discord.Addons.BotConstructor
         }
 
         /// <summary>
+        /// Set bot status
+        /// </summary>
+        /// <returns><see cref="Task.CompletedTask"/></returns>
+        public async Task SetStatusAsync(UserStatus userStatus)
+        {
+            await Client.SetStatusAsync(userStatus);
+        }
+
+        /// <summary>
+        /// Set bot game
+        /// </summary>
+        /// <param name="name">Name of game</param>
+        /// <param name="streamUrl">Stream url</param>
+        /// <returns><see cref="Task.CompletedTask"/></returns>
+        public async Task SetGameAsync(string name, string streamUrl = null)
+        {
+            await Client.SetGameAsync(name, streamUrl);
+        }
+
+        /// <summary>
         /// This exception will throw if <see cref="Bot.Token"/> equals null.
         /// </summary>
         public class NoTockenException : Exception
         {
+            /// <summary>
+            /// Initalize new exception
+            /// </summary>
             public NoTockenException() : base("Token was null.") { }
         }
     }

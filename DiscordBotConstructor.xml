@@ -1,0 +1,72 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>DiscordBotConstructor</name>
+    </assembly>
+    <members>
+        <member name="T:Discord.Addons.BotConstructor.Bot">
+            <summary>
+            Main class. There you can edit things like bot name. Also you can run bot and add commands.
+            </summary>
+        </member>
+        <member name="P:Discord.Addons.BotConstructor.Bot.Token">
+            <summary>
+            Bot token. You can't run bot without it.
+            </summary>
+        </member>
+        <member name="P:Discord.Addons.BotConstructor.Bot.Client">
+            <summary>
+            Discord Client
+            </summary>
+        </member>
+        <member name="P:Discord.Addons.BotConstructor.Bot.GetBotAsUser">
+            <summary>
+            Get bot as <see cref="T:Discord.WebSocket.SocketUser"/>.
+            </summary>
+        </member>
+        <member name="P:Discord.Addons.BotConstructor.Bot.InteractiveService">
+            <summary>
+            Interactive service apply you to conduct dialogue (or something else) with user.
+            </summary>
+        </member>
+        <member name="P:Discord.Addons.BotConstructor.Bot.TimeSpanForInteractivity">
+            <summary>
+            This propery set time span of timeout when someone conducts dialogue with bot. If user won't answer question (or something else) span bot stop dialogue.
+            </summary>
+        </member>
+        <member name="P:Discord.Addons.BotConstructor.Bot.CommandService">
+            <summary>
+            Commands service. If you want make your own commands you should use this method <see cref="M:Discord.Addons.BotConstructor.Bot.InitilizeNewCommands(System.Type)"/>
+            </summary>
+        </member>
+        <member name="P:Discord.Addons.BotConstructor.Bot.Services">
+            <summary>
+            Services. You can use to excute commands.
+            </summary>
+        </member>
+        <member name="M:Discord.Addons.BotConstructor.Bot.#ctor(System.String)">
+            <summary>
+            Initilizes new <see cref="T:Discord.Addons.BotConstructor.Bot"/>
+            </summary>
+            <param name="token">There you should enter the bot token. You can get it on this website: https://discord.com/developers/applications/. You can enter it later, but you can't run bot without token. If token equals null <see cref="T:Discord.Addons.BotConstructor.Bot.NoTockenException"/> will throw.</param>
+        </member>
+        <member name="M:Discord.Addons.BotConstructor.Bot.RunBotAsync">
+            <summary>
+            Run bot. If <see cref="P:Discord.Addons.BotConstructor.Bot.Token"/> equals null <see cref="T:Discord.Addons.BotConstructor.Bot.NoTockenException"/> will throw.
+            </summary>
+            <returns><see cref="P:System.Threading.Tasks.Task.CompletedTask"/></returns>
+        </member>
+        <member name="M:Discord.Addons.BotConstructor.Bot.InitilizeNewCommands(System.Type)">
+            <summary>
+            Initilize new commands by <see cref="T:System.Type"/>. Use typeof() to enter type.
+            </summary>
+            <param name="type">Enter type there by typeof()</param>
+            <returns></returns>
+        </member>
+        <member name="T:Discord.Addons.BotConstructor.Bot.NoTockenException">
+            <summary>
+            This exception will throw if <see cref="P:Discord.Addons.BotConstructor.Bot.Token"/> equals null.
+            </summary>
+        </member>
+    </members>
+</doc>
