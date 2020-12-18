@@ -5,6 +5,7 @@ using Discord.Addons.Interactive;
 using Microsoft.Extensions.DependencyInjection;
 using System.Collections.Generic;
 using Discord.Commands;
+using DiscordBotConstructor;
 
 namespace Discord.Addons.BotConstructor
 {
@@ -41,6 +42,10 @@ namespace Discord.Addons.BotConstructor
         /// Services. You can use to excute commands.
         /// </summary>
         public IServiceProvider Services { get; private set; }
+        /// <summary>
+        /// Initilizes new <see cref="Rooms"/>
+        /// </summary>
+        public Rooms Rooms { get => new Rooms(this); }
 
         /// <summary>
         /// Initilizes new <see cref="Bot"/>
