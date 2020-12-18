@@ -36,7 +36,7 @@ namespace DiscordBotConstructor
             var socketGuildUser = arg1 as SocketGuildUser;
             if (GuildsCreateRoomsChannel[socketGuildUser.Guild] != null)
             {
-                SocketCategoryChannel roomsCategory = socketGuildUser.Guild.GetCategoryChannel((ulong)((SocketVoiceChannel)GuildsCreateRoomsChannel[socketGuilduser.Guild]).CategoryId);
+                SocketCategoryChannel roomsCategory = socketGuildUser.Guild.GetCategoryChannel((ulong)((SocketVoiceChannel)GuildsCreateRoomsChannel[socketGuildUser.Guild]).CategoryId);
                 var createRoomChannel = (SocketVoiceChannel)GuildsCreateRoomsChannel[socketGuildUser.Guild];
                 var channel = arg3.VoiceChannel;
                 var prevchannel = arg2.VoiceChannel;
