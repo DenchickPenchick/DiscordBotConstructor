@@ -14,7 +14,7 @@ namespace DiscordBotConstructor
         /// <summary>
         /// Hashtable of guilds. Where guild (<see cref="SocketGuild"/>) is key and CreateRoomChannel is value (<see cref="SocketVoiceChannel"/>).
         /// </summary>
-        public Hashtable GuildsCreateRoomsChannel { get; set; }
+        public Hashtable GuildsCreateRoomsChannel { get; set; } = new Hashtable();
 
         private DiscordSocketClient Client { get; }
 
@@ -36,33 +36,30 @@ namespace DiscordBotConstructor
             var socketGuildUser = arg1 as SocketGuildUser;
             if (GuildsCreateRoomsChannel[socketGuildUser.Guild] != null)
             {
-                SocketCategoryChannel roomsCategory = socketGuildUser.Guild.GetCategoryChannel((ulong)((SocketVoiceChannel)GuildsCreateRoomsChannel[socketGuilduser.Guild]).CategoryId);
+                SocketCategoryChannel roomsCategory = socketGuildUser.Guild.GetCategoryChannel((ulong)((SocketVoiceChannel)GuildsCreateRoomsChannel[socketGuildUser.Guild]).CategoryId);
                 var createRoomChannel = (SocketVoiceChannel)GuildsCreateRoomsChannel[socketGuildUser.Guild];
                 var channel = arg3.VoiceChannel;
                 var prevchannel = arg2.VoiceChannel;
                 if (channel != null && prevchannel != null && channel != prevchannel)
                 {
                     if (channel == createRoomChannel)
-                    {
-                        if (prevchannel.Category == roomsCategory)
-                        {
-                            if (prevchannel.Name.Contains(socketGuildUser.Nickname) || prevchannel.Name.Contains(socketGuildUser.Username))
-                                await socketGuildUser.ModifyAsync(x => x.Channel = prevchannel);
-                            else if (prevchannel.Users.Count == 0)
-                                await prevchannel.DeleteAsync();
-                            else
-                                await CreateRoom(socketGuildUser);
-                        }
+                    {                                                
+                        if (prevchannel.Name.Contains(socketGuildUser.Nickname) || prevchannel.Name.Contains(socketGuildUser.Username))
+                            await socketGuildUser.ModifyAsync(x => x.Channel = prevchannel);
+                        else if (prevchannel.Users.Count == 0 && prevchannel.Category == roomsCategory)
+                            await prevchannel.DeleteAsync();
+                        else
+                            await CreateRoom(socketGuildUser);                        
                     }
                     else if (prevchannel != createRoomChannel && prevchannel.Category == roomsCategory && prevchannel.Users.Count == 0)
                         await prevchannel.DeleteAsync();
                 }
-                else if (channel != null)//Пользователь подкючился
+                else if (channel != null)//User connected
                 {
                     if (channel == createRoomChannel)
                         await CreateRoom(socketGuildUser);
                 }
-                else if (prevchannel != null)//Пользователь отключился
+                else if (prevchannel != null)//User disconnected
                     if (prevchannel.Users.Count == 0 && prevchannel.Category == roomsCategory && prevchannel.Name != createRoomChannel.Name)
                         await prevchannel.DeleteAsync();
             }

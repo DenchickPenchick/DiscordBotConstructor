@@ -21,7 +21,7 @@ namespace Discord.Addons.BotConstructor
         /// <summary>
         /// Discord Client
         /// </summary>
-        public DiscordSocketClient Client { get; private set; }
+        public DiscordSocketClient Client { get; private set; } = new DiscordSocketClient();
         /// <summary>
         /// Get bot as <see cref="SocketUser"/>.
         /// </summary>
@@ -64,8 +64,7 @@ namespace Discord.Addons.BotConstructor
         {
             if (Token == null)
                 throw new NoTockenException();
-
-            Client = new DiscordSocketClient();
+            
             InteractiveService = new InteractiveService(Client, new InteractiveServiceConfig
             {
                 DefaultTimeout = TimeSpanForInteractivity
@@ -81,21 +80,11 @@ namespace Discord.Addons.BotConstructor
         }
 
         /// <summary>
-        /// Initilize new commands by <see cref="Type"/>. Use typeof() to enter type.
-        /// </summary>
-        /// <param name="type">Enter type there by typeof()</param>
-        /// <returns></returns>
-        public async Task InitilizeNewCommands(Type type)
-        {
-            await CommandService.AddModuleAsync(type, Services);
-        }
-
-        /// <summary>
         /// Set bot status
         /// </summary>
         /// <returns><see cref="Task.CompletedTask"/></returns>
         public async Task SetStatusAsync(UserStatus userStatus)
-        {
+        {            
             await Client.SetStatusAsync(userStatus);
         }
 
