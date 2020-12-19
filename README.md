@@ -8,4 +8,4 @@ But you *should* install that:
 [Discord Interactivity](https://github.com/foxbot/Discord.Addons.Interactive), 
 [DependencyInjection](https://github.com/dotnet/runtime).
 
-**The repository is under development. In future there will be interactive and some things**
+**The repository is under development.**
