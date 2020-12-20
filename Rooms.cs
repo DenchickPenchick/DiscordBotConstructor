@@ -1,6 +1,5 @@
 ﻿using Discord.Addons.BotConstructor;
 using Discord.WebSocket;
-using System;
 using System.Collections;
 using System.Threading.Tasks;
 
