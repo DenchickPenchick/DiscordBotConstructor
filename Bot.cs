@@ -47,6 +47,11 @@ namespace Discord.Addons.BotConstructor
         public Rooms Rooms { get => new Rooms(this); }
 
         /// <summary>
+        /// Initilizes new <see cref="PagedEmbed"/>
+        /// </summary>
+        public PagedEmbed PagedEmbed { get => new PagedEmbed(this); }
+
+        /// <summary>
         /// Initilizes new <see cref="Bot"/>
         /// </summary>
         /// <param name="token">There you should enter the bot token. You can get it on this website: https://discord.com/developers/applications/. You can enter it later, but you can't run bot without token. If token equals null <see cref="NoTockenException"/> will throw.</param>
