@@ -4,7 +4,6 @@ using Discord.WebSocket;
 using Discord.Addons.Interactive;
 using Microsoft.Extensions.DependencyInjection;
 using Discord.Commands;
-using DiscordBotConstructor;
 
 namespace Discord.Addons.BotConstructor
 {
