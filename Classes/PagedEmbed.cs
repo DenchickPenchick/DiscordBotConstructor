@@ -6,7 +6,7 @@ using Discord.Addons.Interactive;
 using Discord.Commands;
 using Discord.WebSocket;
 
-namespace DiscordBotConstructor
+namespace Discord.Addons.BotConstructor
 {
     /// <summary>
     /// This class can help you to create paginated embed. For example: if you have a lot of commands and you want make "Help" for this, but in regular embed the number of characters is limited so you can use paged embed

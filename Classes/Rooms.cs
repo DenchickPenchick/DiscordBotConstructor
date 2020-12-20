@@ -3,7 +3,7 @@ using Discord.WebSocket;
 using System.Collections;
 using System.Threading.Tasks;
 
-namespace DiscordBotConstructor
+namespace Discord.Addons.BotConstructor
 {
     /// <summary>
     /// This module can help you create rooms system. For example: on Discord server a lot of voice channels and it terrifired. You can create and delete rooms dynamically!
