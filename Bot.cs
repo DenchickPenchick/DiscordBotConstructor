@@ -3,7 +3,6 @@ using System.Threading.Tasks;
 using Discord.WebSocket;
 using Discord.Addons.Interactive;
 using Microsoft.Extensions.DependencyInjection;
-using System.Collections.Generic;
 using Discord.Commands;
 using DiscordBotConstructor;
 
