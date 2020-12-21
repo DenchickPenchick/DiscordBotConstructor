@@ -33,7 +33,7 @@ namespace Discord.Addons.BotConstructor
         /// </summary>
         public TimeSpan TimeSpanForInteractivity { get; set; }
         /// <summary>
-        /// Commands service. If you want make your own commands you should use this method <see cref="InitilizeNewCommands(Type)"/>
+        /// Commands service.
         /// </summary>
         public CommandService CommandService { get; set; }
         /// <summary>
