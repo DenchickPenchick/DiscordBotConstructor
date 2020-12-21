@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Discord;
 using Discord.WebSocket;
 
-namespace DiscordBotConstructor.Classes
+namespace Discord.Addons.BotConstructor.Entities
 {
     /// <summary>
     /// Class where you can take user data also you can modify it.
