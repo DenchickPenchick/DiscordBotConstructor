@@ -4,6 +4,8 @@ using Discord.WebSocket;
 using Discord.Addons.Interactive;
 using Microsoft.Extensions.DependencyInjection;
 using Discord.Commands;
+using System.Collections.Generic;
+using System.Reflection;
 
 namespace Discord.Addons.BotConstructor
 {
@@ -62,24 +64,36 @@ namespace Discord.Addons.BotConstructor
         /// <summary>
         /// Run bot. If <see cref="Bot.Token"/> equals null <see cref="NoTockenException"/> will throw.
         /// </summary>
+        /// <param name="basicSetupOfCommands">By default it's true. If it's true <see cref="CommandService"/> will setup.</param>
         /// <returns><see cref="Task.CompletedTask"/></returns>
-        public async Task RunBotAsync()
+        public async Task RunBotAsync(bool basicSetupOfCommands = true)
         {
             if (Token == null)
                 throw new NoTockenException();
-            
+
+            CommandService = new CommandService();
+
             InteractiveService = new InteractiveService(Client, new InteractiveServiceConfig
             {
                 DefaultTimeout = TimeSpanForInteractivity
             });
-            Services = new ServiceCollection().
-                AddSingleton(Client)
+            Services = new ServiceCollection()
+                .AddSingleton(Client)
                 .AddSingleton(InteractiveService)
+                .AddSingleton<CommandService>()
                 .BuildServiceProvider();
+
+            if(basicSetupOfCommands)
+                Client.Ready += Client_Ready;
 
             await Client.LoginAsync(TokenType.Bot, Token);
             await Client.StartAsync();
             await Task.Delay(-1);
+        }
+
+        private async Task Client_Ready()
+        {
+            await BasicCommandsSetup();
         }
 
         /// <summary>
@@ -100,6 +114,12 @@ namespace Discord.Addons.BotConstructor
         public async Task SetGameAsync(string name, string streamUrl = null)
         {
             await Client.SetGameAsync(name, streamUrl);
+        }
+        
+        //Makes basic setup of commands.
+        private async Task BasicCommandsSetup()
+        {            
+            await CommandService.AddModulesAsync(Assembly.GetEntryAssembly(), Services);
         }
 
         /// <summary>
