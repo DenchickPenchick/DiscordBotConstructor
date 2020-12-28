@@ -50,5 +50,43 @@ namespace Discord.Addons.BotConstructor
         /// <param name="id">ID</param>
         /// <returns><see cref="SocketGuildUser"/></returns>
         public async Task<SocketGuildUser> SearchUserByIdAsync(IGuild guild, ulong id) =>  await guild.GetUserAsync(id) as SocketGuildUser;
+
+        /// <summary>
+        /// Searches Channel by name.
+        /// </summary>
+        /// <param name="guild"><see cref="IGuild"/></param>
+        /// <param name="name">Name</param>
+        /// <returns><see cref="IEnumerable{T}"/></returns>
+        public IEnumerable<SocketGuildChannel> GetChannelByName(IGuild guild, string name)
+        {
+            var SocketGuild = guild as SocketGuild;
+            var channels = SocketGuild.Channels;
+
+            foreach (var channel in channels)
+                if (channel.Name == name)
+                    yield return channel;
+        }
+
+        /// <summary>
+        /// Searches channel by ID
+        /// </summary>
+        /// <param name="guild"><see cref="IGuild"/></param>
+        /// <param name="id">ID</param>
+        /// <returns><see cref="SocketGuildUser"/></returns>
+        public async Task<SocketGuildChannel> GetChannelById(IGuild guild, ulong id) => await guild.GetChannelAsync(id) as SocketGuildChannel;
+
+        /// <summary>
+        /// Gets channel by type like <see cref="SocketTextChannel"/>
+        /// </summary>
+        /// <typeparam name="T">Type</typeparam>
+        /// <param name="guild"><see cref="IGuild"/></param>
+        /// <param name="name">Name</param>
+        /// <returns><see cref="IEnumerable{T}"/></returns>
+        public IEnumerable<SocketGuildChannel> GetChannelByName<T>(IGuild guild, string name)
+        {
+            foreach (var channel in GetChannelByName(guild, name))            
+                if (channel is T)
+                    yield return channel;            
+        }
     }
 }
